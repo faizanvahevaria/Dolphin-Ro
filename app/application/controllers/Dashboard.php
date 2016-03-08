@@ -12,10 +12,14 @@ class Dashboard extends MY_Controller
 	{
 		parent::__construct();
 		$this->data['meta_title'] = "Dashboard";
+		$this->load->model('bill_m');
 	}
 
 	public function index()
 	{
-		$this->load->view('_layout_main', $this->data);
+		//$this->data = $this->bill_m->get();
+		//print_r($data['bill_list']);
+		$this->load->view('dashboard/index', $this->data);
 	}
+
 }

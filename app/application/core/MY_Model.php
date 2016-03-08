@@ -9,7 +9,7 @@
 class MY_Model extends CI_Model
 {
 	protected $_table_name = '';
-	protected $_primary_key = 'id';
+	protected $_primary_key = '';
 	protected $_primary_filter = 'intval';
 	protected $_order_by = '';
 	public $rules = array();
@@ -23,7 +23,7 @@ class MY_Model extends CI_Model
 
 	public function get($id = NULL, $single = FALSE)
 	{
-		if($id == NULL)
+		if($id != NULL)
 		{
 			$filter = $this->_primary_filter;
 			$id = $filter($id);
@@ -39,10 +39,6 @@ class MY_Model extends CI_Model
 			$method = 'result';
 		}
 
-		if( ! count($this->db-ar_orderby) )
-		{
-			$this->db->order_by($this->_order_by);
-		}
 		return $this->db->get($this->_table_name)->$method();
 	}
 
@@ -52,4 +48,41 @@ class MY_Model extends CI_Model
 		return $this->get(NULL, $single);
 	}
 
+	public function save($data, $id = NULL)
+	{
+		// Insert
+		if($id === NULL)
+		{
+			$this->db->set($data);
+			$this->db->insert($this->_table_name, $data);
+			$id = $this->db->insert_id();
+		}
+		// Update
+		else
+		{
+			$filter = $this->_primary_filter;
+			$id = $filter($id);
+			$this->db->set($data);
+			$this->db->where($this->_primary_key, $id);
+			$this->db->update($this->_table_name);
+		}
+
+		return $id;
+	}
+
+	public function delete($id)
+	{
+		$filter = $this->_primary_filter;
+		$id = $filter($id);
+
+		if( ! $id)
+		{
+			return FALSE;
+		}
+
+		$this->db->where($this->_primary_key, $id);
+		$this->db->limit(1);
+		$this->db->delete($this->_table_name);
+
+	}
 }

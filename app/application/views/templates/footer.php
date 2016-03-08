@@ -4,10 +4,8 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 
-<!-- Script to Activate the Carousel -->
-<script>
-
-</script>
+<!-- Custom JavaScript -->
+<script src="<?php echo base_url('assets/js/custom.js') ?>"></script>
 
 </body>
 
