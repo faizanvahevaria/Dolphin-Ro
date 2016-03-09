@@ -224,3 +224,11 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.panel-title > .btn-primary {
+	margin-top: -6px;
+	color: #fff;
+}
+
+
+/* Form Style */

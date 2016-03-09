@@ -42,9 +42,11 @@ class MY_Model extends CI_Model
 		return $this->db->get($this->_table_name)->$method();
 	}
 
+
 	public function get_by($where, $single = FALSE)
 	{
 		$this->db->where($where);
+		$this->db->order_by($this->_order_by, 'ASC');
 		return $this->get(NULL, $single);
 	}
 

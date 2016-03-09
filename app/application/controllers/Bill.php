@@ -12,33 +12,67 @@ class Bill extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('bill_m');
+		$this->load->model('item_m');
+		$this->load->model('customer_m');
 	}
 
 	public function view($id)
 	{
+
+		$clause = array(
+				'select' => '*',
+				'join' => 'customer',
+				'on' => 'customer.id = bill_list.customer_id',
+				'where' => 'bill_no = ' . $id,
+				'type' => ''
+		);
+
+		$this->data['bill'] = $this->bill_m->get_join($clause);
+
+		$this->data['item'] = $this->item_m->get_by(array(
+				'bill_no' => $id
+		));
+
+		$this->data['meta_title'] = 'Bill';
+		$this->data['subview'] = 'bill/view';
+		$this->load->view('_main', $this->data);
 	}
 
 	public function edit($id)
 	{
+		$this->data['meta_title'] = 'Edit Bill';
+
+		$clause = array(
+			'select' => '*',
+			'join' => 'customer',
+			'on' => 'customer.id = bill_list.customer_id',
+			'where' => '',
+			'type' => ''
+		);
+
+		$this->data['bill'] = $this->bill_m->get_join($clause);
+		$this->data['subview'] = 'bill/edit';
+		$this->load->view('_main', $this->data);
 	}
 
 	public function delete($id)
 	{
-		$this->bill_m->delete($id);
+		//$this->bill_m->delete($id);
 	}
 
 	public function create()
 	{
-		$data = array(
-			'bill_date'		=> '2016-03-09',
-			'bill_amount' 	=> '10000',
-			'customer_id'	=> '3',
-			'bill_discount' => '200',
-			'bill_tax'		=> '200'
-		);
+		$rules = $this->bill_m->rules;
+		$this->form_validation->set_rules($rules);
+		if($this->form_validation->run() == TRUE)
+		{
 
-		$id = $this->bill_m->save($data, 3);
-		var_dump($id);
+		}
+
+		$this->data['meta_title'] = 'New Bill';
+		$this->data['subview'] = 'bill/new';
+		$this->load->view('_main', $this->data);
+
 	}
 
 

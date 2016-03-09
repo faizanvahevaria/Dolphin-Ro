@@ -17,9 +17,21 @@ class Dashboard extends MY_Controller
 
 	public function index()
 	{
-		//$this->data = $this->bill_m->get();
-		//print_r($data['bill_list']);
-		$this->load->view('dashboard/index', $this->data);
+		$clause = array(
+				'select' => 'bill_no, bill_date, bill_amount, customer.customer_name',
+				'join' => 'customer',
+				'on' => 'customer.id = bill_list.customer_id',
+				'where' => '',
+				'type' => ''
+		);
+
+		$this->data['bill_list'] = $this->bill_m->get_join($clause);
+		$this->data['subview'] = 'bill/list';
+		//echo "<pre>";
+		//print_r($this->data['bill_list']);
+		//echo "</pre>";
+		$this->load->view('_main', $this->data);
 	}
+
 
 }

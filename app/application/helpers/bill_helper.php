@@ -8,12 +8,12 @@
 
 function btn_edit($uri)
 {
-	return anchor($uri, '<i class="icon-edit"></i>');
+	return anchor($uri, '<i class="fa fa-lg fa-pencil"></i>');
 }
 
 function btn_delete($uri)
 {
-	return anchor($uri, '<i class="icon-remove"></i>', array(
+	return anchor($uri, '<i class="fa fa-lg fa-trash"></i>', array(
 		'onclick' => "return confirm('Are you sure you want to delete this Record?');"
 	));
 }

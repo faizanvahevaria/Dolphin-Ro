@@ -1,5 +1,22 @@
-<?php $this->load->view('templates/header'); ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<title><?php echo $meta_title; ?></title>
+
+	<!-- Bootstrap Core CSS -->
+	<link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
+
+	<!-- Custom Fonts -->
+	<link href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
+
 	<link href="<?php echo base_url('assets/css/signin.css') ?>" rel="stylesheet">
+
+
+</head>
+
+<body>
 
 	<div class="container">
 		<?php echo form_open('', array('class' => 'form-signin')); ?>
@@ -45,4 +62,16 @@
 		<?php echo form_close(); ?>
 
 	</div>
-<?php $this->load->view('templates/footer'); ?>
+
+	<!-- jQuery -->
+	<script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+
+	<!-- Custom JavaScript -->
+	<script src="<?php echo base_url('assets/js/custom.js') ?>"></script>
+
+</body>
+
+</html>
