@@ -8,13 +8,23 @@
 	<!-- Bootstrap Core CSS -->
 	<link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
 
+	<!-- jQuery UI CSS -->
+
+	<link href="<?php echo base_url('assets/css/jquery-ui.min.css'); ?>" rel="stylesheet">
+
+	<script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/jquery-ui.min.js') ?>"></script>
+
+	<link href="<?php echo base_url('assets/css/jquery-ui.theme.min.css'); ?>" rel="stylesheet">
+
+
 	<!-- Custom CSS -->
 	<link href="<?php echo base_url('assets/css/sb-admin.css'); ?>" rel="stylesheet">
 
 	<!-- Custom Fonts -->
 	<link href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
 
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
 
@@ -41,30 +51,19 @@
 				<a href="<?php echo base_url(); ?>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url(); ?>"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+				<a href="<?php echo base_url('bill/customer'); ?>"><i class="fa fa-fw fa-table"></i> Customers</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url(); ?>"><i class="fa fa-fw fa-table"></i> Tables</a>
+				<a href="<?php echo base_url('cash_receipt/view_list'); ?>"><i class="fa fa-fw fa-usd"></i> Cash Receipts</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url(); ?>"><i class="fa fa-fw fa-edit"></i> Forms</a>
+				<a href="<?php echo base_url('reminder'); ?>"><i class="fa fa-fw fa-edit"></i> Reminders</a>
+			</li>
+			<li>
+				<a href="<?php echo base_url('user/update'); ?>"><i class="fa fa-fw fa-user"></i> Change Username/Password</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('user/logout'); ?>"><i class="fa fa-fw fa-desktop"></i> Logout</a>
-			</li>
-			<li>
-				<a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-			</li>
-			<li>
-				<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-				<ul id="demo" class="collapse">
-					<li>
-						<a href="#">Dropdown Item</a>
-					</li>
-					<li>
-						<a href="#">Dropdown Item</a>
-					</li>
-				</ul>
 			</li>
 		</ul>
 	</div>
@@ -74,14 +73,13 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="<?php echo base_url('assets/js/jquery.js') ?>"></script>
-
 <!-- Bootstrap Core JavaScript -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
 
 <!-- Custom JavaScript -->
 <script src="<?php echo base_url('assets/js/custom.js') ?>"></script>
+
+
 
 </body>
 

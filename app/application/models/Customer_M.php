@@ -21,4 +21,45 @@ class Customer_M extends MY_Model
 		parent::__construct();
 	}
 
+	public function save($data, $id = NULL)
+	{
+		// Insert
+		if($id === NULL)
+		{
+			// If customer name exists
+			//echo var_dump($data);
+
+			$result = $this->get_by(array('customer_name' => $data['customer_name']), TRUE);
+
+
+			//echo var_dump($result);
+			if(empty($result))
+			{
+				$this->db->set($data);
+				$this->db->insert($this->_table_name, $data);
+				$id = $this->db->insert_id();
+
+			}
+			else
+			{
+				//echo "else";
+				//echo var_dump($result);
+
+				$id = $result->id;
+			}
+
+		}
+		// Update
+		else
+		{
+			$filter = $this->_primary_filter;
+			$id = $filter($id);
+			$this->db->set($data);
+			$this->db->where($this->_primary_key, $id);
+			$this->db->update($this->_table_name);
+		}
+
+		return $id;
+	}
+
 }

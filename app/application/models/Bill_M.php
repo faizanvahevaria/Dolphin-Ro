@@ -59,12 +59,92 @@ class Bill_M extends MY_Model
 	{
 		$this->db->select($clause['select']);
 		$this->db->from($this->_table_name);
+		$this->db->limit(20);
 		($clause['where'] == '') ? : $this->db->where($clause['where']);
 		($clause['type'] == '') ? $this->db->join($clause['join'], $clause['on'])
 								: $this->db->join($clause['join'], $clause['on'], $clause['type']);
+		$this->db->order_by('bill_no', 'DESC');
 
-		//$q = $this->db->get_compiled_select();
+		//echo $q = $this->db->get_compiled_select();
 		return $this->db->get()->result();
 
 	}
+
+	public function get_bill_no()
+	{
+		$this->db->select_max('bill_no');
+		$result = $this->db->get($this->_table_name)->result();
+		$row = $result[0];
+		return $row->bill_no;
+	}
+
+	public function get_receipt_no()
+	{
+		$this->db->select_max('receipt_no');
+		$result = $this->db->get('receipt_list')->result();
+		$row = $result[0];
+		return $row->receipt_no;
+	}
+
+	public function get_receipt($bill_no)
+	{
+		$this->db->order_by('receipt_date', 'DESC');
+		$where = array('bill_no' => $bill_no);
+		return $this->db->get_where('receipt_list', $where)->result();
+	}
+
+	public function save_receipt($data, $id = NULL)
+	{
+		// Insert
+		if($id === NULL)
+		{
+			$this->db->set($data);
+			$this->db->insert('receipt_list', $data);
+			$id = $this->db->insert_id();
+		}
+		// Update
+		else
+		{
+			$filter = $this->_primary_filter;
+			$id = $filter($id);
+			$this->db->set($data);
+			$this->db->where($this->_primary_key, $id);
+			$this->db->update($this->_table_name);
+		}
+
+		return $id;
+	}
+
+	public function delete_receipt($receipt_no)
+	{
+		$filter = $this->_primary_filter;
+		$receipt_no = $filter($receipt_no);
+
+		if( ! $receipt_no)
+		{
+			return FALSE;
+		}
+
+		$this->db->where('receipt_no', $receipt_no);
+		$this->db->limit(1);
+		$this->db->delete('receipt_list');
+
+	}
+
+	public function get_customer($clause)
+	{
+		$this->db->select($clause['select']);
+		$this->db->from($this->_table_name);
+		($clause['where'] == '') ? : $this->db->where($clause['where']);
+		($clause['type'] == '') ? $this->db->join($clause['join'], $clause['on'])
+				: $this->db->join($clause['join'], $clause['on'], $clause['type']);
+		$this->db->order_by('customer_name', 'ASC');
+
+		//echo $q = $this->db->get_compiled_select();
+		return $this->db->get()->result();
+	}
+
+
+
+
 }

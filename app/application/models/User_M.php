@@ -8,8 +8,9 @@
  */
 class User_M extends MY_Model
 {
-	protected $_table_name = '';
+	protected $_table_name = 'user_info';
 	protected $_order_by = '';
+	protected $_primary_key = 'id';
 	public $rules = array(
 		'username' => array(
 			'field' => 'username',
@@ -28,8 +29,17 @@ class User_M extends MY_Model
 		parent::__construct();
 	}
 
-	public function login()
+	public function login($username)
 	{
+
+		$result = $this->get_by(
+				array(
+						'username' => $username
+				), TRUE);
+
+		return $result->password;
+
+		/*
 		if($this->input->post('username') == 'admin' && $this->input->post('password') == 'admin')
 		{
 			//Login User
@@ -38,7 +48,7 @@ class User_M extends MY_Model
 				'loggedin' => TRUE
 			);
 			$this->session->set_userdata($data);
-		}
+		} */
 	}
 	public function logout()
 	{

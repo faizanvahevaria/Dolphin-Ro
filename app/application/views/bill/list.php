@@ -14,30 +14,47 @@
 
 						<div class="row">
 							<div class="col-lg-12">
-								<div class="table-responsive">
-									<table class="table table-hover">
-										<thead>
+								<div id="no-more-tables">
+									<table class="table table-hover table-striped">
+										<thead class="cf">
 										<tr>
-											<th class="col-md-1">Bill No</th>
-											<th class="col-md-5">Customer Name</th>
-											<th class="col-md-2">Date</th>
-											<th class="col-md-2">Bill Amount</th>
-											<th class="col-md-2">Action</th>
+											<th class="numeric">Bill No</th>
+											<th>Customer Name</th>
+											<th class="numeric">Date</th>
+											<th class="numeric">Amount</th>
+											<th>Action</th>
 										</tr>
 										</thead>
 										<tbody>
 										<?php if(count($bill_list)): ?>
 											<?php foreach($bill_list as $bill): ?>
+											<?php if($bill->tax1 == 0) { ?>
+
 												<tr>
-													<td><?php echo $bill->bill_no; ?></td>
-													<td><?php echo $bill->customer_name; ?></td>
-													<td><?php echo $bill->bill_date; ?></td>
-													<td><?php echo $bill->bill_amount; ?></td>
-													<td>
-														<?php echo btn_edit('bill/edit/' . $bill->bill_no); ?> &nbsp;
-														<?php echo btn_delete('bill/delete/' . $bill->bill_no); ?>
+													<td data-title="Bill No" class="numeric"><?php echo $bill->bill_no; ?></td>
+													<td data-title="Customer Name"><?php echo $bill->customer_name . "&nbsp; &nbsp;" . anchor('notax/view/' . $bill->bill_no , '<i class="fa fa-lg fa-eye"></i>');?> &nbsp;&nbsp; <a href="<?php echo base_url('notax/bill_pdf/' . $bill->bill_no) ?>"><i class="fa fa-lg fa-download"></i></a> </td>
+													<td data-title="Date" class="numeric"><?php echo $bill->bill_date; ?></td>
+													<td data-title="Amount" class="numeric"><?php echo $bill->bill_amount; ?></td>
+													<td data-title="Action">
+														<?php echo anchor('notax/edit/' . $bill->bill_no, '<i class="fa fa-lg fa-pencil"></i>'); ?> &nbsp; &nbsp;
+														<?php echo anchor('notax/delete/' . $bill->bill_no, '<i class="fa fa-lg fa-trash"></i>', array(
+																'onclick' => "return confirm('Are you sure you want to delete this Record?');"
+														)); ?>
 													</td>
 												</tr>
+											<?php } else { ?>
+
+													<tr>
+														<td data-title="Bill No" class="numeric"><?php echo $bill->bill_no; ?></td>
+														<td data-title="Customer Name"><?php echo $bill->customer_name . btn_view($bill->bill_no); ?> &nbsp;&nbsp; <a href="<?php echo base_url('bill/bill_pdf/' . $bill->bill_no) ?>"><i class="fa fa-lg fa-download"></i></a> </td>
+														<td data-title="Date" class="numeric"><?php echo $bill->bill_date; ?></td>
+														<td data-title="Amount" class="numeric"><?php echo $bill->bill_amount; ?></td>
+														<td data-title="Action">
+															<?php echo btn_edit($bill->bill_no); ?> &nbsp; &nbsp;
+															<?php echo btn_delete( $bill->bill_no); ?>
+														</td>
+													</tr>
+											<?php } ?>
 											<?php endforeach; ?>
 										<?php endif; ?>
 										</tbody>

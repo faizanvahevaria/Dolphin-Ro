@@ -13,7 +13,7 @@
 
 	<link href="<?php echo base_url('assets/css/signin.css') ?>" rel="stylesheet">
 
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 				'class' => 'form-control',
 				'placeholder' => 'Username',
 				'required' => '',
-				'value' => 'admin'
+				'value' => $user_name
 			);
 			$password = array(
 				'type'	=> 'password',
@@ -44,11 +44,11 @@
 			echo form_input($username);
 			echo form_input($password);
 			?>
-			<div class="checkbox">
+			<!--<div class="checkbox">
 				<label>
 					<input type="checkbox" value="remember-me"> Keep me logged in
 				</label>
-			</div>
+			</div>-->
 			<?php
 			echo validation_errors('<span class="error">', '</span>');
 

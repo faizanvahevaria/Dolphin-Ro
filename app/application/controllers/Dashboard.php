@@ -18,7 +18,7 @@ class Dashboard extends MY_Controller
 	public function index()
 	{
 		$clause = array(
-				'select' => 'bill_no, bill_date, bill_amount, customer.customer_name',
+				'select' => 'bill_no, bill_date, bill_amount, customer.customer_name, tax1',
 				'join' => 'customer',
 				'on' => 'customer.id = bill_list.customer_id',
 				'where' => '',

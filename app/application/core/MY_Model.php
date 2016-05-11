@@ -45,9 +45,19 @@ class MY_Model extends CI_Model
 
 	public function get_by($where, $single = FALSE)
 	{
-		$this->db->where($where);
+		//$this->db->where($where);
 		$this->db->order_by($this->_order_by, 'ASC');
-		return $this->get(NULL, $single);
+		if($single == TRUE)
+		{
+			$method = 'row';
+		}
+		else
+		{
+			$method = 'result';
+		}
+
+		return $this->db->get_where($this->_table_name, $where)->$method();
+
 	}
 
 	public function save($data, $id = NULL)
