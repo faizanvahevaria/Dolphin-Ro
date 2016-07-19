@@ -70,7 +70,7 @@ $address_a = array(
 );
 
 // Changing Bill Date Format
-$bill_row->bill_date = date('d/m/Y', strtotime($bill_row->bill_date));
+$bill_row->bill_date = date('d-m-Y', strtotime($bill_row->bill_date));
 $date_a = array(
     'type'	=> 'text',
     'id'	=> 'date',
